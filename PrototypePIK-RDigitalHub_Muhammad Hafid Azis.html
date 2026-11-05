@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIK-R Digital Hub | Pendampingan Mental & Navigasi Karier GenRe BKKBN</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              teal: '#0F766E',      /* Sage/Deep Teal */
+              tealLight: '#14B8A6',
+              tealSoft: '#CCFBF1',
+              blue: '#2563EB',      /* Professional Blue */
+              blueLight: '#38BDF8',
+              blueSoft: '#E0F2FE',
+              orange: '#F97316',    /* Warm Accent */
+              orangeLight: '#FFEDD5',
+              cream: '#FFFBEB',
+              dark: '#0F172A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Pulse animation for map pins */
+    @keyframes pinPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(15, 118, 110, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(15, 118, 110, 0); }
+    }
+    .pin-active {
+      animation: pinPulse 2s infinite;
+    }
+
+    /* Bubble Chat Animation */
+    .chat-bubble-appear {
+      animation: fadeInUp 0.25s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-teal selection:text-white">
+
+  <!-- TOP EMERGENCY BANNER -->
+  <div class="bg-gradient-to-r from-brand-teal to-brand-blue text-white text-xs md:text-sm py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center bg-white/20 px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide uppercase">
+          <i class="fa-solid fa-heart-pulse mr-1"></i> Inisiatif Resmi
+        </span>
+        <span>Di bawah pembinaan <strong>Kemendukbangga & Program GenRe</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Branding -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-teal to-brand-blue flex items-center justify-center text-white shadow-md shadow-brand-teal/20 group-hover:scale-105 transition">
+          <i class="fa-solid fa-seedling text-xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-xl tracking-tight text-slate-900">PIK-R</span>
+            <span class="text-xs font-bold uppercase tracking-wider bg-brand-orange text-white px-2 py-0.5 rounded-md">Digital Hub</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium">Kesehatan Mental & Arah Karier Remaja</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <a href="#hero" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-brand-teal rounded-lg hover:bg-slate-100 transition">Beranda</a>
+        <a href="#chatbot-section" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-brand-teal rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
+          <i class="fa-regular fa-comment-dots text-brand-teal"></i> Chatbot 
+        </a>
+        <a href="#assessment-section" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-brand-teal rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-list-check text-brand-blue"></i> Asesmen 
+        </a>
+        <a href="#ruang-aman-section" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-brand-teal rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-location-dot text-brand-orange"></i> Ruang Aman
+        </a>
+        <a href="#direktori-section" class="px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-brand-teal rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-user-doctor text-indigo-600"></i> Mitra Profesional
+        </a>
+      </nav>
+
+      <!-- Quick Action / CTA -->
+      <div class="flex items-center gap-3">
+        <a class="hidden sm:inline-flex items-center gap-2 bg-brand-teal hover:bg-teal-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-md shadow-brand-teal/20 transition transform active:scale-95">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Daftar</span>
+        </a>
+        <button id="mobileMenuBtn" class="md:hidden text-slate-700 p-2 text-xl focus:outline-none" aria-label="Buka menu navigasi mobile">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-2">
+      <a href="#hero" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Beranda</a>
+      <a href="#chatbot-section" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Chatbot Konseling 24/7</a>
+      <a href="#assessment-section" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Asesmen Mandiri Mental & Karier</a>
+      <a href="#ruang-aman-section" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Ruang Aman Unit PIK-R</a>
+      <a href="#direktori-section" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg">Direktori Mentor & Psikolog</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 md:py-24 bg-gradient-to-b from-brand-tealSoft/30 via-slate-50 to-white">
+      <!-- Decorative Blobs -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-tealLight/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -left-32 w-80 h-80 bg-brand-blueLight/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Column (Copywriting) -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-brand-cream border border-amber-200 px-3.5 py-1.5 rounded-full text-brand-orange text-xs font-bold tracking-wide shadow-sm">
+              <span class="flex h-2 w-2 rounded-full bg-brand-orange animate-ping"></span>
+              Sahabat Remaja Hadapi Quarter-Life Crisis
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+              Pulihkan Ketenangan Pikiran, Petakan 
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-blue">Arah Karier Nyata.</span>
+            </h1>
+
+            <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Ekosistem digital resmi binaan <strong>Kemendukbangga & Program GenRe</strong> untuk remaja Indonesia. Jembatani kecemasan masa depan dengan validasi emosi terarah, konseling sebaya dan bimbingan karier.
+            </p>
+
+            <!-- CTA Cluster -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
+              <a href="#chatbot-section" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brand-teal hover:bg-teal-800 text-white font-semibold text-base px-6 py-3.5 rounded-xl shadow-lg shadow-brand-teal/25 transition">
+                <i class="fa-regular fa-comment-dots text-lg"></i>
+                <span>Mulai Ngobrol Chatbot Konseling</span>
+              </a>
+              <a href="#assessment-section" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-semibold text-base px-6 py-3.5 rounded-xl shadow-sm transition">
+                <i class="fa-solid fa-compass text-brand-blue"></i>
+                <span>Ikuti Asesmen Mental</span>
+              </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center sm:text-left">
+              <div>
+                <p class="text-2xl font-bold text-slate-900">450+</p>
+                <p class="text-xs text-slate-500 font-medium">Unit PIK-R Kampus & Desa</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-brand-teal">24/7</p>
+                <p class="text-xs text-slate-500 font-medium">Dukungan Berbasis Chatbot, Asesmen & Konseling</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-brand-orange">100%</p>
+                <p class="text-xs text-slate-500 font-medium">Privasi Data & Anonim Terjaga</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (Interactive Persona Card / Showcase) -->
+          <div class="lg:col-span-5">
+            <div class="relative mx-auto max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-slate-100">
+              
+              <!-- Badge Status GenRe -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center text-brand-teal font-bold">
+                    <i class="fa-solid fa-robot"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Chatbot Konseling</h3>
+                    <p class="text-xs text-slate-400">Tersedia 24/7, berbasis Retrieval-Based</p>
+                  </div>
+                </div>
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Aktif Online</span>
+              </div>
+
+              <!-- Persona Voice Quote -->
+              <div class="my-4 bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                <div class="flex gap-3">
+                  <div class="w-8 h-8 rounded-full bg-brand-orange text-white flex-shrink-0 flex items-center justify-center text-xs font-bold">
+                    FG
+                  </div>
+                  <div>
+                    <p class="text-xs italic text-slate-700 leading-snug">
+                      "IPK saya 3.7 tapi sudah kirim 40 lamaran belum ada panggilan. Rasanya malu sama keluarga dan takut tertinggal..."
+                    </p>
+                    <span class="text-[10px] text-slate-400 font-medium mt-1 block">— Anonymous, Fresh Graduate Teknik Industri (23 thn)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Solusi PIK-R Hub -->
+              <div class="space-y-2.5">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Solusi Terintegrasi Kami:</p>
+                <div class="flex items-center gap-3 text-xs bg-teal-50 text-teal-900 p-2.5 rounded-xl border border-teal-100">
+                  <i class="fa-solid fa-circle-check text-brand-teal"></i>
+                  <span>Bantuan lanjutan kesehatan mental oleh Psikolog</span>
+                </div>
+                <div class="flex items-center gap-3 text-xs bg-sky-50 text-sky-900 p-2.5 rounded-xl border border-sky-100">
+                  <i class="fa-solid fa-file-shield text-brand-blue"></i>
+                  <span>Audit kesiapan CV & Portofolio oleh Mentor Karir</span>
+                </div>
+                <div class="flex items-center gap-3 text-xs bg-amber-50 text-amber-900 p-2.5 rounded-xl border border-amber-100">
+                  <i class="fa-solid fa-hand-holding-heart text-brand-orange"></i>
+                  <span>Validasi emosi tanpa penghakiman oleh Konselor Sebaya</span>
+                </div>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Punya cerita serupa?</span>
+                <a href="#chatbot-section" class="text-xs font-bold text-brand-teal hover:underline flex items-center gap-1">
+                  Mulai Curhat Santai <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. FITUR UTAMA A: CHATBOT KONSELING DIGITAL 24/7 -->
+    <section id="chatbot-section" class="py-16 md:py-24 bg-white border-t border-slate-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+          <span class="inline-block bg-teal-100 text-brand-teal font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+            Chatbot Konseling
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+            Validasi Emosi Kapan Saja, Respon Nyata Berbasis Modul Resmi.
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base">
+            Didukung kurasi modul resmi Kemendukbangga/GenRe (Kesehatan Mental Remaja & Kesiapan Kerja).
+          </p>
+        </div>
+
+        <!-- Chat Container Mockup -->
+        <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col h-[650px]">
+          
+          <!-- Chat Header -->
+          <div class="bg-gradient-to-r from-brand-teal to-teal-800 text-white px-6 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-11 h-11 rounded-full bg-white text-brand-teal font-bold flex items-center justify-center text-lg shadow">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full"></span>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm sm:text-base flex items-center gap-1.5">
+                  Chatbot Konseling
+                </h3>
+                <p class="text-xs text-teal-100">Kurasi Modul BKKBN GenRe No. 04/M-KESPRO/2024</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="resetChat()" title="Reset Obrolan" class="text-xs bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1">
+                <i class="fa-solid fa-arrows-rotate text-[11px]"></i> Bersihkan
+              </button>
+            </div>
+          </div>
+
+          <!-- Suggested Quick Prompts (3 Tombol Pilihan Pemantik) -->
+          <div class="bg-teal-50/70 border-b border-teal-100 p-3 sm:px-6">
+            <p class="text-[11px] font-bold text-teal-900 mb-2 uppercase tracking-wider flex items-center gap-1">
+              <i class="fa-solid fa-bolt text-brand-orange"></i> Pilih Pemantik Pertanyaan Cepat:
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="triggerQuickPrompt(1)" class="text-xs bg-white hover:bg-brand-teal hover:text-white text-slate-700 font-medium px-3 py-2 rounded-xl border border-slate-200 transition shadow-sm text-left">
+                1. "Aku cemas belum dapat kerja, harus mulai dari mana?"
+              </button>
+              <button onclick="triggerQuickPrompt(2)" class="text-xs bg-white hover:bg-brand-teal hover:text-white text-slate-700 font-medium px-3 py-2 rounded-xl border border-slate-200 transition shadow-sm text-left">
+                2. "Bantu latihan pernapasan untuk redakan panik."
+              </button>
+              <button onclick="triggerQuickPrompt(3)" class="text-xs bg-white hover:bg-brand-teal hover:text-white text-slate-700 font-medium px-3 py-2 rounded-xl border border-slate-200 transition shadow-sm text-left">
+                3. "Bagaimana tips membedah CV agar lolos kurasi berkas?"
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Conversation Scroll Area -->
+          <div id="chatMessages" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+            
+            <!-- Default Welcome Bot Message -->
+            <div class="flex items-start gap-3 chat-bubble-appear">
+              <div class="w-8 h-8 rounded-full bg-brand-teal text-white flex-shrink-0 flex items-center justify-center text-xs font-bold shadow">
+                 <i class="fa-solid fa-robot"></i>
+              </div>
+              <div class="max-w-[85%] bg-white rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm text-slate-700 shadow-sm border border-slate-100 space-y-2">
+                <p>Halo sahabat muda! Selamat datang di <strong>PIK-R Digital Hub</strong>. Aku di sini untuk mendengarkan curahan hatimu tanpa penghakiman.</p>
+                <p>Apakah kamu sedang merasa tertekan dengan transisi kelulusan, bingung menyusun CV, atau butuh teman bicara yang aman hari ini? Silakan pilih tombol pemantik di atas atau ketik pesanmu sendiri.</p>
+                <span class="block text-[10px] text-slate-400 text-right mt-1">Baru saja • Modul GenRe BKKBN</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Typing Indicator -->
+          <div id="typingIndicator" class="hidden px-6 py-2 text-xs text-slate-400 italic flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-brand-teal animate-bounce"></span>
+            <span class="inline-block w-2 h-2 rounded-full bg-brand-teal animate-bounce [animation-delay:0.2s]"></span>
+            <span class="inline-block w-2 h-2 rounded-full bg-brand-teal animate-bounce [animation-delay:0.4s]"></span>
+            <span>Konselor sedang menyusun balasan empatik...</span>
+          </div>
+
+          <!-- Chat Input Field -->
+          <div class="p-3 sm:p-4 bg-white border-t border-slate-200">
+            <form id="chatForm" onsubmit="handleUserMessage(event)" class="flex gap-2 items-center">
+              <input 
+                id="userInput" 
+                type="text" 
+                placeholder="Tulis curhatan atau pertanyaan kariermu di sini..." 
+                class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal focus:bg-white transition"
+                autocomplete="off"
+              />
+              <button type="submit" class="bg-brand-teal hover:bg-teal-800 text-white font-semibold px-5 py-3 rounded-xl transition text-xs sm:text-sm shadow-md flex items-center gap-2">
+                <span>Kirim</span>
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+              </button>
+            </form>
+            <p class="text-[11px] text-slate-400 mt-2 text-center">
+              <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> Data percakapan dienkripsi dan anonim. Identitas pribadimu dijamin aman.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. FITUR UTAMA B: ASESMEN KONDISI MENTAL & KARIER -->
+    <section id="assessment-section" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <span class="inline-block bg-sky-100 text-brand-blue font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+            Asesmen Kondisi Mental & Kesiapan Karier
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+            Pahami Kondisi Diri atau Temukan Potensi Karier yang Paling Sesuai.
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base">
+            Ambil sedikit waktu untuk mengevaluasi beban stres saat ini atau kesiapan instrumen kerjamu. Dapatkan rapor analisis mandiri beserta saran aksi nyata terarah.
+          </p>
+        </div>
+
+        <!-- Mode Selector Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="assessmentSelection">
+          
+          <!-- Card 1: Asesmen Mental -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-transparent hover:border-brand-teal shadow-lg hover:shadow-xl transition flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-teal-50 text-brand-teal flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Asesmen Kondisi Mental</h3>
+              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Ketahui level quarter-life crisis, beban kecemasan serta kelelahan kondisi emosional saat ini.
+              </p>
+              <div class="flex items-center gap-4 text-xs text-slate-500 pt-2">
+                <span><i class="fa-regular fa-clock mr-1"></i> 3 Menit</span>
+                <span><i class="fa-solid fa-check-double mr-1"></i> 4 Pertanyaan Kunci</span>
+                <span><i class="fa-solid fa-lock mr-1"></i> Anonim</span>
+              </div>
+            </div>
+            <div class="pt-6">
+              <button onclick="startAssessment('mental')" class="w-full bg-brand-teal hover:bg-teal-800 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                <span>Mulai Asesmen Kondisi Mental</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Asesmen Karier -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-transparent hover:border-brand-blue shadow-lg hover:shadow-xl transition flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-sky-50 text-brand-blue flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Asesmen Kesiapan Karier</h3>
+              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Evaluasi kesiapan resume/portofolio, mentalitas menghadapi dunia kerja, serta pemetaan kompetensi skill kamu.
+              </p>
+              <div class="flex items-center gap-4 text-xs text-slate-500 pt-2">
+                <span><i class="fa-regular fa-clock mr-1"></i> 3 Menit</span>
+                <span><i class="fa-solid fa-check-double mr-1"></i> 4 Pertanyaan Kunci</span>
+                <span><i class="fa-solid fa-bullseye mr-1"></i> Pemetaan Minat</span>
+              </div>
+            </div>
+            <div class="pt-6">
+              <button onclick="startAssessment('career')" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                <span>Mulai Asesmen Kesiapan Karier</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Quiz Area (Hidden Initially) -->
+        <div id="quizContainer" class="hidden bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl max-w-3xl mx-auto">
+          <!-- Quiz Top Info -->
+          <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+            <div>
+              <span id="quizBadge" class="text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 px-3 py-1 rounded-full">
+                Asesmen Kondisi Mental
+              </span>
+              <h3 id="quizTitle" class="text-lg font-bold text-slate-800 mt-1">Langkah Evaluasi</h3>
+            </div>
+            <button onclick="cancelAssessment()" class="text-xs text-slate-400 hover:text-rose-500 font-semibold">
+              <i class="fa-solid fa-xmark mr-1"></i> Batalkan
+            </button>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="mb-6">
+            <div class="flex justify-between text-xs text-slate-500 mb-2 font-semibold">
+              <span id="questionStepText">Pertanyaan 1 dari 4</span>
+              <span id="progressPercentage">25%</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div id="progressBar" class="bg-brand-teal h-full transition-all duration-300" style="width: 25%"></div>
+            </div>
+          </div>
+
+          <!-- Question Content -->
+          <div class="space-y-6">
+            <h4 id="questionTitle" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+              Seberapa sering kamu merasa cemas atau insomnia saat memikirkan status kariermu 2 minggu terakhir?
+            </h4>
+
+            <div id="optionsContainer" class="space-y-3">
+              <!-- Dynamically populated options -->
+            </div>
+
+            <!-- Quiz Navigation -->
+            <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+              <button id="prevBtn" onclick="prevQuestion()" class="hidden text-xs font-bold text-slate-500 hover:text-slate-800 px-4 py-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Kembali
+              </button>
+              <div class="ml-auto">
+                <button id="nextBtn" onclick="nextQuestion()" disabled class="bg-slate-300 cursor-not-allowed text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition flex items-center gap-2">
+                  <span>Lanjutkan</span>
+                  <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. FITUR UTAMA C: RUANG AMAN (JEJARING UNIT PIK-R) -->
+    <section id="ruang-aman-section" class="py-16 md:py-24 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+          <span class="inline-block bg-orange-100 text-brand-orange font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+            Ruang Aman
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+            Kamu Tidak Berjuang Sendiri: Temukan Tempat Bercerita & Bertumbuh Bersama Ruang Aman.
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base">
+            Temukan unit PIK-R terdekat di kampus atau kelurahanmu. Ikuti agenda "Konseling Sebaya", curahkan bebanmu lewat bercerita atau diskusi bedah CV santai yang difasilitasi pendidik sebaya terlatih.
+          </p>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 mb-8 max-w-4xl mx-auto flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+            <input 
+              id="searchUnitInput" 
+              type="text" 
+              placeholder="Cari nama kampus, universitas, atau kelurahan posko..." 
+              oninput="filterUnits()"
+              class="w-full pl-11 pr-4 py-2.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-orange"
+            />
+          </div>
+          <select id="cityFilter" onchange="filterUnits()" class="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-orange">
+            <option value="all">Semua Wilayah</option>
+            <option value="Jakarta">DKI Jakarta</option>
+            <option value="Depok">Depok & Sekitarnya</option>
+            <option value="Yogyakarta">D.I. Yogyakarta</option>
+            <option value="Surabaya">Surabaya</option>
+          </select>
+        </div>
+
+        <!-- Grid Layout: Interactive Visual Map + Directory List -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Interactive Visual Map Mockup (Left 7 Cols) -->
+          <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="font-bold text-base flex items-center gap-2">
+                  <i class="fa-solid fa-map-location-dot text-brand-orange"></i>
+                  Peta Sebaran Unit PIK-R Terdekat
+                </h3>
+                <p class="text-xs text-slate-400">Pilih titik pin untuk melihat detail kegiatan dan jadwal konseling</p>
+              </div>
+              <span class="bg-brand-teal/20 text-brand-tealLight text-[11px] font-bold px-2.5 py-1 rounded-full border border-brand-tealLight/30">
+                GPS Akurat: Aktif
+              </span>
+            </div>
+
+            <!-- Stylized SVG / Canvas Interactive Map Simulation -->
+            <div class="relative w-full h-[380px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 flex items-center justify-center overflow-hidden">
+              <!-- Grid Background Lines -->
+              <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px]"></div>
+              
+              <!-- Road/River SVG Paths Mockup -->
+              <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 600 400" fill="none">
+                <path d="M 0 150 Q 200 120 300 240 T 600 200" stroke="#0F766E" stroke-width="6" stroke-linecap="round"/>
+                <path d="M 120 0 Q 180 200 400 350 T 600 400" stroke="#38BDF8" stroke-width="4" stroke-dasharray="6 6"/>
+                <circle cx="280" cy="190" r="140" stroke="#F97316" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4"/>
+              </svg>
+
+              <!-- Central User Location Badge -->
+              <div class="absolute top-[48%] left-[45%] -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-10">
+                <div class="w-8 h-8 rounded-full bg-blue-500/30 border-2 border-blue-400 flex items-center justify-center animate-ping absolute inset-0"></div>
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-blue-500/50">
+                  <i class="fa-solid fa-person text-sm"></i>
+                </div>
+                <span class="text-[10px] bg-slate-900/90 text-white font-bold px-2 py-0.5 rounded shadow mt-1 inline-block">Lokasi Kamu</span>
+              </div>
+
+              <!-- Interactive Pins -->
+              <!-- Pin 1: UI Depok -->
+              <button onclick="selectUnitFromMap(1)" class="group absolute top-[28%] left-[28%] text-center focus:outline-none z-20">
+                <div class="w-10 h-10 rounded-2xl bg-brand-teal text-white flex items-center justify-center font-bold text-xs shadow-lg pin-active transition transform group-hover:scale-125">
+                  <i class="fa-solid fa-university"></i>
+                </div>
+                <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-teal-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
+                  PIK-R UI Depok (1.2 km)
+                </span>
+              </button>
+
+              <!-- Pin 2: Sahabat Unair -->
+              <button onclick="selectUnitFromMap(2)" class="group absolute bottom-[22%] right-[24%] text-center focus:outline-none z-20">
+                <div class="w-10 h-10 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-bold text-xs shadow-lg transition transform group-hover:scale-125">
+                  <i class="fa-solid fa-hands-holding-child"></i>
+                </div>
+                <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-orange-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
+                  PIK-R Unair (3.4 km)
+                </span>
+              </button>
+
+              <!-- Pin 3: UGM Bestari -->
+              <button onclick="selectUnitFromMap(3)" class="group absolute top-[30%] right-[32%] text-center focus:outline-none z-20">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-lg transition transform group-hover:scale-125">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-indigo-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
+                  PIK-R UGM (2.1 km)
+                </span>
+              </button>
+
+              <!-- Pin 4: Desa Menteng -->
+              <button onclick="selectUnitFromMap(4)" class="group absolute bottom-[30%] left-[22%] text-center focus:outline-none z-20">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-lg transition transform group-hover:scale-125">
+                  <i class="fa-solid fa-house-chimney-user"></i>
+                </div>
+                <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-emerald-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
+                  PIK-R Menteng (4.5 km)
+                </span>
+              </button>
+
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle text-brand-teal text-[8px]"></i> Unit PIK-R Kampus</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle text-brand-orange text-[8px]"></i> Komunitas Wilayah</span>
+              <span class="text-slate-300 font-medium">Semua Sesi Konseling Sebaya: <strong>Rp 0 (Gratis)</strong></span>
+            </div>
+          </div>
+
+          <!-- Cards Directory List (Right 5 Cols) -->
+          <div class="lg:col-span-5 space-y-4" id="unitCardsContainer">
+            <!-- Dynamically Rendered Unit Cards -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. FITUR UTAMA D: DIREKTORI KONSELING PROFESIONAL & MENTORSHIP KARIER -->
+    <section id="direktori-section" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+          <span class="inline-block bg-indigo-100 text-indigo-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+            Direktori Konseling Profesional & Mentorship Karier
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+            Langkah Lanjutan Lebih Pasti: Bimbingan Psikolog, Mentor Karir dan Program Pelatihan Intensif.
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base">
+            Ketika kamu membutuhkan bantuan klinis mendalam atau bimbingan spesifik mendapatkan karier impian.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+          <button onclick="filterMentors('all')" class="mentor-tab-btn active bg-slate-900 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl transition shadow-sm" data-tab="all">
+            Semua
+          </button>
+          <button onclick="filterMentors('psychologist')" class="mentor-tab-btn bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl border border-slate-200 transition" data-tab="psychologist">
+            <i class="fa-solid fa-user-doctor text-brand-teal mr-1"></i> Psikolog Klinis
+          </button>
+          <button onclick="filterMentors('career')" class="mentor-tab-btn bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl border border-slate-200 transition" data-tab="career">
+            <i class="fa-solid fa-briefcase text-brand-blue mr-1"></i> Mentor Karier & HR
+          </button>
+          <button onclick="filterMentors('bootcamp')" class="mentor-tab-btn bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl border border-slate-200 transition" data-tab="bootcamp">
+            <i class="fa-solid fa-graduation-cap text-brand-orange mr-1"></i> Bootcamp & Sertifikasi
+          </button>
+        </div>
+
+        <!-- Mentors & Programs Grid -->
+        <div id="mentorsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically Rendered Mitra Cards -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+        
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-brand-teal text-white flex items-center justify-center font-bold">
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+            <span class="font-extrabold text-lg text-white">PIK-R Digital Hub</span>
+          </div>
+          <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+            Pusat Informasi dan Konseling Remaja digital terintegrasi. Mentransformasi pembinaan remaja PIK-R menjadi ekosistem pendampingan mental dan karier modern untuk Generasi Indonesia Emas.
+          </p>
+          <div class="flex gap-3 text-sm text-slate-400 pt-2">
+            <a href="#" class="hover:text-white" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-white" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="hover:text-white" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="hover:text-white" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Layanan Inti</h4>
+          <ul class="text-xs space-y-2 text-slate-400">
+            <li><a href="#chatbot-section" class="hover:text-teal-400">Chatbot Konseling</a></li>
+            <li><a href="#assessment-section" class="hover:text-teal-400">Asesmen Keadaan Mental</a></li>
+            <li><a href="#assessment-section" class="hover:text-teal-400">Asesmen Kesiapan Karier</a></li>
+            <li><a href="#ruang-aman-section" class="hover:text-teal-400">Ruang Aman (Unit PIK-R)</a></li>
+            <li><a href="#direktori-section" class="hover:text-teal-400">Konseling Profesional & Mentorship Karier</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Pusat Krisis Darurat</h4>
+          <p class="text-xs text-slate-400 mb-3">Jika kamu atau kerabatmu berada dalam situasi krisis emosi akut yang membahayakan nyawa:</p>
+          <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+            <p class="text-[11px] text-brand-orange font-bold">Kemenkes Sejiwa Hotline</p>
+            <p class="text-base font-bold text-white">119 (Tekan 8)</p>
+            <p class="text-[10px] text-slate-400">Bebas Pulsa • 24 Jam Penuh</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-2">
+        <p>&copy; 2026 PIK-R Digital Hub • Dibina oleh Kemendukbangga & Komunitas Generasi Berencana (GenRe).</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- MODALS CONTAINER                                               -->
+  <!-- ============================================================== -->
+
+  <!-- 1. RAPOR ASESMEN MODAL -->
+  <div id="resultModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto space-y-6">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-100 text-brand-teal flex items-center justify-center font-bold">
+            <i class="fa-solid fa-square-poll-vertical text-lg"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Rapor Hasil Analisis Mandiri</span>
+            <h3 id="modalReportTitle" class="text-base sm:text-lg font-extrabold text-slate-900">Asesmen Kondisi Mental</h3>
+          </div>
+        </div>
+        <button onclick="closeResultModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Skor Status Emosi / Pemetaan -->
+      <div id="modalScoreBanner" class="bg-teal-50 border border-teal-200 rounded-2xl p-5 text-center space-y-1">
+        <span class="text-xs font-bold uppercase tracking-wider text-teal-800" id="modalScoreSubtitle">Klasifikasi Kondisimu</span>
+        <h4 class="text-xl sm:text-2xl font-black text-brand-teal" id="modalScoreTitle">
+          Stres Transisi Sedang - Butuh Regulasi & Istirahat
+        </h4>
+        <p class="text-xs text-slate-600 max-w-lg mx-auto pt-1" id="modalScoreDesc">
+          Tingkat kecemasanmu masih dalam batas adaptif namun mulai mempengaruhi pola tidur dan kepercayaan dirimu saat wawancara kerja.
+        </p>
+      </div>
+
+      <!-- 3 Rekomendasi Aksi Nyata Terarah -->
+      <div class="space-y-3">
+        <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-list-check text-brand-orange"></i> 3 Rekomendasi Aksi Nyata Untukmu:
+        </h5>
+        
+        <div class="space-y-2.5" id="modalRecommendations">
+          <!-- Dynamically populated 3 concrete recommendations -->
+        </div>
+      </div>
+
+      <!-- Rujukan Lanjutan Interaktif -->
+      <div class="pt-4 border-t border-slate-100 bg-slate-50 p-4 rounded-2xl">
+        <p class="text-xs font-bold text-slate-700 mb-2">Butuh Pendampingan Lebih Intensif?</p>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <a href="#ruang-aman-section" onclick="closeResultModal()" class="flex-1 text-center bg-white border border-slate-300 hover:border-brand-teal text-slate-800 text-xs font-bold py-2.5 px-3 rounded-xl transition">
+            <i class="fa-solid fa-location-dot text-brand-teal mr-1"></i> Unit Ruang Aman Sebaya
+          </a>
+          <a href="#direktori-section" onclick="closeResultModal()" class="flex-1 text-center bg-brand-teal hover:bg-teal-800 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition">
+            <i class="fa-solid fa-calendar-check mr-1"></i> Booking Konseling Ahli
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. RSVP RUANG AMAN CONFIRMATION MODAL -->
+  <div id="rsvpModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-100 space-y-5 text-center">
+      <div class="w-16 h-16 rounded-3xl bg-teal-100 text-brand-teal mx-auto flex items-center justify-center text-3xl shadow-inner">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <div>
+        <span class="text-xs font-bold text-brand-teal uppercase tracking-wider">Pendaftaran Berhasil!</span>
+        <h3 class="text-xl font-extrabold text-slate-900 mt-1" id="rsvpUnitName">PIK-R Universitas Indonesia</h3>
+        <p class="text-xs text-slate-500 mt-2" id="rsvpDetails">
+          Kamu terdaftar dalam sesi <strong>"Curhat Melingkar: Redakan Quarter-Life Crisis"</strong> untuk Sabtu ini pukul 14:00 WIB.
+        </p>
+      </div>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-left text-xs text-amber-900 space-y-1">
+        <p class="font-bold"><i class="fa-solid fa-ticket mr-1"></i> Tiket Kehadiran #PIKR-7821</p>
+        <p class="text-[11px] text-amber-800">Cukup tunjukkan tangkapan layar ini saat tiba di sekretariat tanpa syarat biaya apa pun.</p>
+      </div>
+      <button onclick="closeRsvpModal()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl text-xs transition">
+        Simpan & Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. RESERVASI MENTOR MODAL -->
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 space-y-5">
+      <div class="flex justify-between items-start border-b border-slate-100 pb-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-blue uppercase tracking-wide">Formulir Reservasi Sesi</span>
+          <h3 class="text-lg font-bold text-slate-900" id="bookingMentorName">Konseling Privat</h3>
+          <p class="text-xs text-slate-500" id="bookingMentorRole">Psikolog Klinis Dewasa</p>
+        </div>
+        <button onclick="closeBookingModal()" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Pilih Jadwal Sesi:</label>
+          <select id="bookingDateSelect" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 font-medium text-slate-800">
+            <option>Besok, 16:00 - 16:50 WIB (Via Google Meet)</option>
+            <option>Sabtu depan, 10:00 - 10:50 WIB (Via Google Meet)</option>
+            <option>Minggu depan, 19:30 - 20:20 WIB (Via Google Meet)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Topik Utama yang Ingin Didiskusikan:</label>
+          <input type="text" id="bookingTopicInput" placeholder="Contoh: Takut interview bahasa Inggris / Cemas ekspektasi orang tua" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800"/>
+        </div>
+
+        <div class="p-3 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-between">
+          <div>
+            <p class="font-bold text-brand-teal text-xs">Biaya Sesi Subsidi:</p>
+            <p class="text-[11px] text-teal-800">Didukung voucher GenRe BKKBN</p>
+          </div>
+          <span class="text-base font-extrabold text-slate-900" id="bookingPriceTag">Rp 120.000</span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex gap-3">
+        <button onclick="closeBookingModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">
+          Batal
+        </button>
+        <button onclick="confirmBooking()" class="flex-1 bg-brand-teal hover:bg-teal-800 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition">
+          Konfirmasi Reservasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-32 transition-transform duration-300 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs max-w-sm">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toastMessage">Aksi berhasil dilakukan.</span>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT LOGIC & MOCK DATA                                   -->
+  <!-- ============================================================== -->
+  <script>
+    // --- 1. MOCK DATA: CHATBOT KNOWLEDGE BASE (RETRIEVAL-BASED) ---
+    const chatKnowledgeBase = [
+      {
+        id: 1,
+        matchKeywords: ["belum dapat kerja", "cemas", "harus mulai", "fresh graduate", "menganggur"],
+        userText: "Aku cemas belum dapat kerja, harus mulai dari mana?",
+        botResponse: `
+          <div class="space-y-2">
+            <p><strong>Peluk hangat dari kami ya! 🫂</strong> Perasaan cemas saat melihat teman-teman sudah mulai bekerja adalah respons yang <em>sangat wajar</em> (Quarter-Life Crisis).</p>
+            <p>Berdasarkan <em>Modul GenRe Kesiapan Kerja BKKBN</em>, berikut 3 langkah awal memulainya:</p>
+            <ol class="list-decimal pl-4 space-y-1">
+              <li><strong>Validasi Emosimu:</strong> Beri jeda 1–2 hari dari media sosial LinkedIn & Instagram agar tidak terus membandingkan pencapaian.</li>
+              <li><strong>Audit Portofolio Berbasis Kebutuhan:</strong> Coba bedah 10 loker impian dan catat kesamaan 5 kata kunci skill yang paling dicari.</li>
+              <li><strong>Bagi Waktu dengan Formula 40-40-20:</strong> 40% melamar, 40% upgrade portofolio proyek mini, 20% istirahat menjaga kesehatan mental.</li>
+            </ol>
+            <div class="mt-2 pt-2 border-t border-slate-100 flex flex-wrap gap-2">
+              <button onclick="quickNavAssessment('career')" class="bg-teal-50 hover:bg-teal-100 text-brand-teal font-bold text-[11px] px-3 py-1.5 rounded-lg border border-teal-200">
+                <i class="fa-solid fa-briefcase mr-1"></i> Asesmen Kesiapan Karier
+              </button>
+              <button onclick="quickNavUnit()" class="bg-orange-50 hover:bg-orange-100 text-brand-orange font-bold text-[11px] px-3 py-1.5 rounded-lg border border-orange-200">
+                <i class="fa-solid fa-location-dot mr-1"></i> Gabung Sesi Melingkar Sebaya
+              </button>
+            </div>
+            <span class="block text-[10px] text-slate-400 mt-2">Sumber: Panduan Transisi Remaja BKKBN Hal. 42</span>
+          </div>
+        `
+      },
+      {
+        id: 2,
+        matchKeywords: ["napas", "latihan pernapasan", "panik", "panik redakan", "deg-degan"],
+        userText: "Bantu latihan pernapasan untuk redakan panik.",
+        botResponse: `
+          <div class="space-y-2">
+            <p><strong>Ayo tarik napas bersamaku sekarang. Duduk dengan tegak dan rilekskan bahumu. 🍃</strong></p>
+            <p>Kita gunakan teknik <em>Box Breathing 4-4-4-4</em> resmi dari Modul Relaksasi GenRe BKKBN:</p>
+            <div class="bg-teal-50 p-3 rounded-xl border border-teal-100 space-y-1.5 font-medium text-teal-950">
+              <p>1. <strong>Tarik napas</strong> perlahan melalui hidung (Hitung 4 detik)...</p>
+              <p>2. <strong>Tahan napas</strong> di dada dengan tenang (Hitung 4 detik)...</p>
+              <p>3. <strong>Hembuskan</strong> perlahan lewat mulut seperti meniup sedotan (4 detik)...</p>
+              <p>4. <strong>Diam sejenak</strong> sebelum tarikan berikutnya (4 detik)...</p>
+            </div>
+            <p>Ulangi 4 siklus ini. Tubuhmu sedang aman di sini, tidak ada bahaya yang mengejarmu. Jantungmu akan berdegup lebih tenang.</p>
+            <span class="block text-[10px] text-slate-400 mt-2">Sumber: Modul Pertolongan Pertama Emosi Sebaya PIK-R</span>
+          </div>
+        `
+      },
+      {
+        id: 3,
+        matchKeywords: ["cv", "bedah cv", "kurasi berkas", "ats", "interview", "portofolio"],
+        userText: "Bagaimana tips membedah CV agar lolos kurasi berkas?",
+        botResponse: `
+          <div class="space-y-2">
+            <p><strong>Kabar baiknya: Penolakan CV sering kali murni masalah format, bukan kekurangan potensimu! 📄✨</strong></p>
+            <p>Berikut rangkuman kurasi bersama Mentor HR Mitra PIK-R:</p>
+            <ul class="list-disc pl-4 space-y-1">
+              <li><strong>Format Sederhana 1 Kolom (ATS-Friendly):</strong> Hindari kolom ganda artistik kecuali melamar posisi desainer grafis.</li>
+              <li><strong>Rumus Deskripsi Pengalaman (XYZ Formula):</strong> Jangan hanya tulis <em>"Mengelola sosmed"</em>, gantilah menjadi: <em>"Meningkatkan engagement Instagram kampus 45% dalam 3 bulan lewat 12 konten edukatif"</em>.</li>
+              <li><strong>Kesesuaian Kata Kunci:</strong> Pastikan judul skill teknis di CV cocok dengan kata yang tertulis di poster lowongan.</li>
+            </ul>
+            <div class="mt-2 pt-2 border-t border-slate-100 flex gap-2">
+              <a href="#direktori-section" class="inline-block bg-sky-50 hover:bg-sky-100 text-brand-blue font-bold text-[11px] px-3 py-1.5 rounded-lg border border-sky-200">
+                <i class="fa-solid fa-user-tie mr-1"></i> Bedah CV 1-on-1 bersama Praktisi HR
+              </a>
+            </div>
+            <span class="block text-[10px] text-slate-400 mt-2">Sumber: Standar Kompetensi Karier PIK-R Mitra ECC.co.id</span>
+          </div>
+        `
+      }
+    ];
+
+    // --- 2. MOCK DATA: ASESMEN PERTANYAAN (MENTAL & KARIER) ---
+    const assessmentData = {
+      mental: {
+        title: "Asesmen Kondisi Mental (Quarter-Life Crisis)",
+        badge: "Kesehatan Mental & Regulasi Emosi",
+        questions: [
+          {
+            q: "Seberapa sering kamu merasa overwhelmed/cemas saat memikirkan masa depan atau tuntutan mandiri dalam 2 minggu terakhir?",
+            options: [
+              { text: "Jarang sekali atau hampir tidak pernah", score: 1 },
+              { text: "Kadang-kadang, terutama jika sedang scrolling LinkedIn/Instagram", score: 2 },
+              { text: "Sering, sampai mengganggu konsentrasi harian", score: 3 },
+              { text: "Hampir setiap hari disertai rasa sesak atau sulit tidur", score: 4 }
+            ]
+          },
+          {
+            q: "Bagaimana kualitas istirahat tidur dan nafsu makanmu akhir-akhir ini?",
+            options: [
+              { text: "Normal dan terjadwal dengan baik", score: 1 },
+              { text: "Sedikit berantakan tapi masih bisa beraktivitas", score: 2 },
+              { text: "Sering insomnia karena overthinking pekerjaan", score: 3 },
+              { text: "Sangat terganggu, sulit tidur dan tubuh terasa sangat lelah", score: 4 }
+            ]
+          },
+          {
+            q: "Saat menerima penolakan berkas lamaran atau komentar miring dari keluarga, apa respon pertamamu?",
+            options: [
+              { text: "Mengevaluasi kekurangan dengan tenang dan mencoba lagi", score: 1 },
+              { text: "Sedih 1-2 hari lalu mencoba bangkit kembali", score: 2 },
+              { text: "Merasa diri tidak berguna dan menyalahkan diri sendiri berhari-hari", score: 3 },
+              { text: "Menarik diri total dari lingkungan sosial dan putus asa", score: 4 }
+            ]
+          },
+          {
+            q: "Apakah kamu memiliki ruang aman atau teman sebaya yang mau mendengarkan tanpa menghakimimu?",
+            options: [
+              { text: "Punya beberapa teman suportif yang bisa diajak berbagi", score: 1 },
+              { text: "Ada teman bicara tapi sering merasa sungkan membebani mereka", score: 2 },
+              { text: "Hanya memendam semuanya sendirian di kamar", score: 3 },
+              { text: "Merasa benar-benar terisolasi dan tidak ada yang peduli", score: 4 }
+            ]
+          }
+        ],
+        results: {
+          low: {
+            title: "Stres Transisi Rendah - Regulasi Emosi Adaptif",
+            subtitle: "Kondisi Mental Stabil & Sehat",
+            desc: "Kamu memiliki ketahanan mental (resiliensi) yang cukup kuat dalam menghadapi masa transisi. Tetap pertahankan rutinitas istirahat dan luapan emosi positifmu.",
+            recs: [
+              "Pertahankan journaling mingguan untuk merekam hal-hal yang kamu syukuri.",
+              "Ikuti ruang komunitas sebaya untuk membantu teman yang sedang down.",
+              "Tetapkan batasan screen-time media sosial maksimal 1 jam per hari."
+            ]
+          },
+          mid: {
+            title: "Stres Transisi Sedang - Butuh Regulasi & Istirahat",
+            subtitle: "Peringatan Dini Kelelahan Emosional",
+            desc: "Kecemasanmu mulai mempengaruhi ritme tidur dan rasa percaya diri. Ini sinyal tubuh meminta jeda dan membutuhkan validasi dari lingkaran pendukung sebaya.",
+            recs: [
+              "Praktikkan latihan pernapasan terarah Box Breathing 4-4-4-4 setiap pagi dan sebelum tidur.",
+              "Kunjungi posko PIK-R terdekat untuk ikut sesi 'Curhat Melingkar' tanpa beban biaya.",
+              "Fokus pada lingkaran kendali (apa yang bisa kamu lakukan hari ini) daripada hasil akhir."
+            ]
+          },
+          high: {
+            title: "Beban Stres Tinggi - Butuh Pendampingan Profesional Segera",
+            subtitle: "Indikasi Burnout Transisi Akut",
+            desc: "Beban emosionalmu sudah terlalu berat untuk dipikul sendirian. Sangat dianjurkan untuk berkonsultasi privat dengan Psikolog Klinis atau hubungi hotline pendampingan.",
+            recs: [
+              "Konsultasikan kondisimu dengan Psikolog Klinis Mitra PIK-R (Tarif Subsidi Rp120rb).",
+              "Beri tahu orang terdekat atau keluarga yang kamu percayai bahwa kamu sedang butuh jeda.",
+              "Hubungi hotline bebas pulsa BKKBN/Kemenkes di nomor 119 ext. 8 jika panik memuncak."
+            ]
+          }
+        }
+      },
+
+      career: {
+        title: "Asesmen Kondisi Mental Karier & Portofolio",
+        badge: "Pemetaan Minat & Kesiapan Kerja",
+        questions: [
+          {
+            q: "Bagaimana status kelengkapan CV dan portofolio profesionalmu saat ini?",
+            options: [
+              { text: "Sudah ATS-friendly dan memiliki studi kasus proyek nyata", score: 1 },
+              { text: "Sudah ada CV tapi belum yakin apakah formatnya dilirik HR", score: 2 },
+              { text: "Hanya CV standar template kampus tanpa eviden proyek jelas", score: 3 },
+              { text: "Belum punya CV sama sekali dan bingung cara menyusunnya", score: 4 }
+            ]
+          },
+          {
+            q: "Seberapa percaya diri kamu jika besok diundang wawancara kerja teknis atau HR?",
+            options: [
+              { text: "Sangat siap, sudah sering simulasi metode STAR", score: 1 },
+              { text: "Cukup siap tapi sering blank saat ditanya kelemahan diri", score: 2 },
+              { text: "Gugup luar biasa dan takut berbicara di depan pewawancara", score: 3 },
+              { text: "Sangat tidak siap sampai sering menolak panggilan interview", score: 4 }
+            ]
+          },
+          {
+            q: "Apakah kamu sudah memetakan 3 industri atau jenis peran karier yang relevan dengan minat utamamu?",
+            options: [
+              { text: "Sudah spesifik (misal: UI/UX Designer atau Data Analyst)", score: 1 },
+              { text: "Ada gambaran umum tapi masih sering tergoda melamar sembarang posisi", score: 2 },
+              { text: "Masih bingung membedakan antara hobi dan keterampilan yang bernilai jual", score: 3 },
+              { text: "Sama sekali tidak tahu minat dan potensi apa yang dimiliki", score: 4 }
+            ]
+          },
+          {
+            q: "Seberapa konsisten kamu mengalokasikan waktu untuk upgrade keterampilan digital baru?",
+            options: [
+              { text: "Rutin 3-5 jam seminggu mengikuti webinar/kursus online", score: 1 },
+              { text: "Sesekali menonton tutorial di YouTube jika mood sedang bagus", score: 2 },
+              { text: "Sering mendaftar kursus gratis tapi tidak pernah diselesaikan", score: 3 },
+              { text: "Tidak pernah belajar skill baru karena merasa sudah terlambat", score: 4 }
+            ]
+          }
+        ],
+        results: {
+          low: {
+            title: "Kesiapan Karier Prima - Siap Melaju ke Tahap Wawancara",
+            subtitle: "Pemetaan Minat & Skill Terstruktur",
+            desc: "Instrumen kerjamu sudah solid. Fokus utamamu sekarang adalah memperluas jaringan (networking) dan mengasah keterampilan negosiasi gaji.",
+            recs: [
+              "Optimalkan profil LinkedIn dan jalin koneksi dengan 5 HR di perusahaan target.",
+              "Latih simulasi interview menggunakan teknik STAR bersama teman sebaya.",
+              "Ikuti mentorship 1-on-1 bersama praktisi industri untuk benchmarking standar gaji."
+            ]
+          },
+          mid: {
+            title: "Potensi Menjanjikan - Perlu Penajaman Portofolio & Format CV",
+            subtitle: "Transisi Awal Siap Asah",
+            desc: "Kamu memiliki potensi dasar yang baik, namun instrumen berkasmu belum merepresentasikan kompetensimu secara memikat bagi kurasi HR.",
+            recs: [
+              "Bedah ulang CV menjadi format 1 kolom ATS-friendly dengan mencantumkan angka dampak nyata.",
+              "Pilih 1 program sertifikasi praktis bersubsidi bersama mitra RevoU/Karier.mu.",
+              "Ikuti sesi klinik CV gratis di unit posko PIK-R kampus terdekat."
+            ]
+          },
+          high: {
+            title: "Kesenjangan Keterampilan Nyata - Butuh Mentorship Terarah",
+            subtitle: "Fase Perintisan Arah Karier",
+            desc: "Wajar jika merasa bingung di awal. Kamu membutuhkan bimbingan komprehensif untuk memetakan kekuatan diri agar tidak terjebak melamar tanpa arah.",
+            recs: [
+              "Jadwalkan sesi konsultasi 1-on-1 dengan Mentor Karier HR (Subsidi Rp75rb).",
+              "Fokus kuasai 1 keterampilan digital dasar yang paling banyak dibutuhkan pasar.",
+              "Hindari melamar 100 loker acak; pilih maksimal 5 posisi yang benar-benar kamu pelajari profil perusahaannya."
+            ]
+          }
+        }
+      }
+    };
+
+    // --- 3. MOCK DATA: RUANG AMAN JEJARING UNIT PIK-R ---
+    const unitList = [
+      {
+        id: 1,
+        name: "PIK-R Universitas Indonesia (UI)",
+        type: "Unit Kampus",
+        city: "Depok",
+        distance: "1.2 km dari posisimu",
+        address: "Gedung Pusat Kegiatan Mahasiswa (Pusgiwa) Lt. 2, Kampus UI Depok",
+        schedule: "Setiap Rabu & Sabtu (14:00 - 17:00 WIB)",
+        routineActivity: "Curhat Melingkar Antar-Fakultas & Klinik Bedah Portofolio ATS",
+        counselorName: "Nisa Amalia (Pendidik Sebaya GenRe Bersertifikat)",
+        badgeColor: "bg-teal-100 text-teal-800"
+      },
+      {
+        id: 2,
+        name: "PIK-R Sahabat Universitas Airlangga",
+        type: "Unit Kampus",
+        city: "Surabaya",
+        distance: "3.4 km dari posisimu",
+        address: "Student Center Kampus B UNAIR, Jl. Airlangga No. 4, Surabaya",
+        schedule: "Setiap Kamis & Jumat (15:30 - 18:00 WIB)",
+        routineActivity: "Sesi Validasi Emosi Fresh Graduate & Latihan Mindfulness Bersama",
+        counselorName: "Rian Pratama (Konselor Sebaya BKKBN Jatim)",
+        badgeColor: "bg-orange-100 text-orange-800"
+      },
+      {
+        id: 3,
+        name: "PIK-R Bestari Universitas Gadjah Mada",
+        type: "Unit Kampus",
+        city: "Yogyakarta",
+        distance: "2.1 km dari posisimu",
+        address: "Gelanggang Mahasiswa UGM, Sekip Bulaksumur Blok C, Yogyakarta",
+        schedule: "Setiap Selasa & Sabtu (13:00 - 16:30 WIB)",
+        routineActivity: "Diskusi Quarter Life Crisis, Bedah CV Santai & Coffee Chat",
+        counselorName: "Dimas Aji & Sarah K. (Konselor GenRe DIY)",
+        badgeColor: "bg-indigo-100 text-indigo-800"
+      },
+      {
+        id: 4,
+        name: "PIK-R Remaja Guyub Kelurahan Menteng",
+        type: "Unit Kelurahan/Desa",
+        city: "Jakarta",
+        distance: "4.5 km dari posisimu",
+        address: "RPTRA Gondangdia Berseri, Jl. Teuku Umar No. 12, Jakarta Pusat",
+        schedule: "Setiap Sabtu Pagi (09:00 - 12:00 WIB)",
+        routineActivity: "Konseling Terbuka Pemuda Desa, Pelatihan Wirausaha Kreatif",
+        counselorName: "Ibu Larasati & Tim Satgas BKKBN DKI",
+        badgeColor: "bg-emerald-100 text-emerald-800"
+      }
+    ];
+
+    // --- 4. MOCK DATA: DIREKTORI MITRA PROFESIONAL & MENTOR ---
+    const mentorDirectory = [
+      {
+        id: 1,
+        category: "psychologist",
+        name: "Dyah Ayu P., M.Psi., Psikolog",
+        role: "Psikolog Klinis Dewasa (SIPP: 2021-0982-K)",
+        experience: "Pengalaman 7+ Tahun menangani Quarter-Life Crisis & Burnout",
+        price: "Rp 120.000",
+        priceDetails: "Per sesi 50 Menit (Harga Khusus Subsidi PIK-R)",
+        rating: "4.9",
+        reviews: "184 ulasan",
+        tags: ["Kecemasan Karier", "Regulasi Emosi", "CBT Dasar"],
+        icon: "fa-user-doctor",
+        avatarBg: "bg-teal-100 text-brand-teal"
+      },
+      {
+        id: 2,
+        category: "career",
+        name: "Bagas Wicaksono, S.Psi.",
+        role: "Senior HRBP di Unicorn Tech & Career Coach",
+        experience: "Telah membedah 2.500+ CV & mewawancarai 600+ fresh graduate",
+        price: "Rp 75.000",
+        priceDetails: "Per sesi privat 45 Menit",
+        rating: "4.95",
+        reviews: "312 ulasan",
+        tags: ["Bedah CV ATS", "Simulasi Wawancara HR", "Strategi LinkedIn"],
+        icon: "fa-briefcase",
+        avatarBg: "bg-sky-100 text-brand-blue"
+      },
+      {
+        id: 3,
+        category: "psychologist",
+        name: "Farhan Maulana, M.Psi., Psikolog",
+        role: "Psikolog Relasi & Transisi Dewasa Muda",
+        experience: "Fokus pada trauma ekspektasi keluarga & sindrom imposter",
+        price: "Rp 120.000",
+        priceDetails: "Per sesi 50 Menit (Subsidi BKKBN)",
+        rating: "4.88",
+        reviews: "96 ulasan",
+        tags: ["Sindrom Imposter", "Dinamika Keluarga", "Mindfulness"],
+        icon: "fa-user-nurse",
+        avatarBg: "bg-teal-100 text-brand-teal"
+      },
+      {
+        id: 4,
+        category: "bootcamp",
+        name: "RevoU x PIK-R Tech Catalyst",
+        role: "Program Pelatihan Intensif Digital Career",
+        experience: "Jalur Cepat Data Analytics, Digital Marketing & Product",
+        price: "Diskon 65%",
+        priceDetails: "Voucher Beasiswa Khusus Anggota PIK-R Hub",
+        rating: "4.9",
+        reviews: "820 alumni",
+        tags: ["Sertifikasi Industri", "Penyaluran Kerja", "Proyek Nyata"],
+        icon: "fa-laptop-code",
+        avatarBg: "bg-orange-100 text-brand-orange"
+      },
+      {
+        id: 5,
+        category: "career",
+        name: "Karina Siregar, S.M.",
+        role: "Talent Acquisition Lead di Perbankan Nasional",
+        experience: "Spesialisasi lolos Management Trainee (MT / ODP) BUMN & Swasta",
+        price: "Rp 75.000",
+        priceDetails: "Per sesi 45 Menit",
+        rating: "4.92",
+        reviews: "142 ulasan",
+        tags: ["Lolos MT BUMN", "Focus Group Discussion (FGD)", "Portofolio"],
+        icon: "fa-user-tie",
+        avatarBg: "bg-sky-100 text-brand-blue"
+      },
+      {
+        id: 6,
+        category: "bootcamp",
+        name: "Karier.mu & ECC.co.id Fellowship",
+        role: "Akselerator Kesiapan Kerja Vokasi & Sarjana",
+        experience: "Pelatihan soft skills komunikasi kerja & sertifikasi BNSP",
+        price: "Beasiswa 100%",
+        priceDetails: "Kuota terbatas 50 kuota per bulan bagi binaan GenRe",
+        rating: "4.8",
+        reviews: "450 alumni",
+        tags: ["Gratis Bersyarat", "Sertifikasi BNSP", "Magang BUMN"],
+        icon: "fa-certificate",
+        avatarBg: "bg-orange-100 text-brand-orange"
+      }
+    ];
+
+    // --- APPLICATION STATE ---
+    let currentAssessmentType = null;
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+
+    // --- INITIALIZATION ---
+    document.addEventListener("DOMContentLoaded", () => {
+      renderUnits(unitList);
+      renderMentors(mentorDirectory);
+
+      // Mobile Menu Toggle
+      const mobileBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+      }
+    });
+
+    // --- CHATBOT LOGIC ---
+    function triggerQuickPrompt(promptId) {
+      const match = chatKnowledgeBase.find(item => item.id === promptId);
+      if (!match) return;
+
+      appendUserBubble(match.userText);
+      showTypingIndicator();
+
+      setTimeout(() => {
+        hideTypingIndicator();
+        appendBotBubble(match.botResponse);
+      }, 700);
+    }
+
+    function handleUserMessage(event) {
+      event.preventDefault();
+      const inputEl = document.getElementById("userInput");
+      const message = inputEl.value.trim();
+      if (!message) return;
+
+      appendUserBubble(message);
+      inputEl.value = "";
+      showTypingIndicator();
+
+      const lower = message.toLowerCase();
+      // Match from knowledge base
+      let found = chatKnowledgeBase.find(item => 
+        item.matchKeywords.some(keyword => lower.includes(keyword))
+      );
+
+      setTimeout(() => {
+        hideTypingIndicator();
+        if (found) {
+          appendBotBubble(found.botResponse);
+        } else {
+          // Empathetic fallback response based on GenRe module principles
+          const fallback = `
+            <div class="space-y-2">
+              <p>Terima kasih sudah mau berbagi cerita dengan kami. Pikiran dan perasaanmu sepenuhnya valid. 🌿</p>
+              <p>Meskipun aku adalah asisten berbasis modul yang sedang terus mempelajari topikmu, kamu tidak sendirian. Untuk mendapatkan respon yang lebih mendalam, kamu bisa:</p>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Memilih salah satu <strong>pemantik cepat di atas</strong> (Cemas kerja, latihan napas, atau tips CV).</li>
+                <li>Mencoba <strong>Asesmen Mandiri</strong> untuk memetakan kondisimu secara ilmiah.</li>
+                <li>Berkunjung langsung ke <strong>Unit PIK-R terdekat</strong> untuk ngobrol tatap muka bersama pendidik sebaya.</li>
+              </ul>
+              <span class="block text-[10px] text-slate-400 mt-2">Dukungan Konseling Sebaya PIK-R</span>
+            </div>
+          `;
+          appendBotBubble(fallback);
+        }
+      }, 900);
+    }
+
+    function appendUserBubble(text) {
+      const container = document.getElementById("chatMessages");
+      const userHtml = `
+        <div class="flex items-start justify-end gap-3 chat-bubble-appear">
+          <div class="max-w-[85%] bg-brand-teal text-white rounded-2xl rounded-tr-sm p-4 text-xs sm:text-sm shadow-sm space-y-1">
+            <p>${escapeHtml(text)}</p>
+            <span class="block text-[10px] text-teal-200 text-right">Kamu</span>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex-shrink-0 flex items-center justify-center text-xs font-bold shadow">
+            ME
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', userHtml);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendBotBubble(htmlContent) {
+      const container = document.getElementById("chatMessages");
+      const botHtml = `
+        <div class="flex items-start gap-3 chat-bubble-appear">
+          <div class="w-8 h-8 rounded-full bg-brand-teal text-white flex-shrink-0 flex items-center justify-center text-xs font-bold shadow">
+            PIK
+          </div>
+          <div class="max-w-[85%] bg-white rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm text-slate-700 shadow-sm border border-slate-100">
+            ${htmlContent}
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', botHtml);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+      const el = document.getElementById("typingIndicator");
+      el.classList.remove("hidden");
+      const container = document.getElementById("chatMessages");
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      document.getElementById("typingIndicator").classList.add("hidden");
+    }
+
+    function resetChat() {
+      const container = document.getElementById("chatMessages");
+      container.innerHTML = `
+        <div class="flex items-start gap-3 chat-bubble-appear">
+          <div class="w-8 h-8 rounded-full bg-brand-teal text-white flex-shrink-0 flex items-center justify-center text-xs font-bold shadow">
+            PIK
+          </div>
+          <div class="max-w-[85%] bg-white rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm text-slate-700 shadow-sm border border-slate-100 space-y-2">
+            <p>Obrolan telah dibersihkan. Selamat datang kembali di <strong>PIK-R Digital Hub</strong>!</p>
+            <p>Silakan pilih pemantik di atas atau tuliskan hal apa pun yang sedang membebani pikiranmu saat ini.</p>
+            <span class="block text-[10px] text-slate-400 text-right mt-1">Baru saja • Modul GenRe BKKBN</span>
+          </div>
+        </div>
+      `;
+      showToast("Ruang percakapan telah dibersihkan.");
+    }
+
+    function quickNavAssessment(type) {
+      const section = document.getElementById("assessment-section");
+      section.scrollIntoView({ behavior: 'smooth' });
+      startAssessment(type);
+    }
+
+    function quickNavUnit() {
+      const section = document.getElementById("ruang-aman-section");
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- ASESMEN LOGIC ---
+    function startAssessment(type) {
+      currentAssessmentType = type;
+      currentQuestionIndex = 0;
+      userAnswers = [];
+
+      document.getElementById("assessmentSelection").classList.add("hidden");
+      document.getElementById("quizContainer").classList.remove("hidden");
+
+      const meta = assessmentData[type];
+      document.getElementById("quizBadge").innerText = meta.badge;
+      document.getElementById("quizTitle").innerText = meta.title;
+
+      renderCurrentQuestion();
+    }
+
+    function cancelAssessment() {
+      document.getElementById("quizContainer").classList.add("hidden");
+      document.getElementById("assessmentSelection").classList.remove("hidden");
+    }
+
+    function renderCurrentQuestion() {
+      const quiz = assessmentData[currentAssessmentType];
+      const q = quiz.questions[currentQuestionIndex];
+      const total = quiz.questions.length;
+
+      // Progress bar & counters
+      const percentage = Math.round(((currentQuestionIndex + 1) / total) * 100);
+      document.getElementById("questionStepText").innerText = `Pertanyaan ${currentQuestionIndex + 1} dari ${total}`;
+      document.getElementById("progressPercentage").innerText = `${percentage}%`;
+      document.getElementById("progressBar").style.width = `${percentage}%`;
+
+      document.getElementById("questionTitle").innerText = q.q;
+
+      // Options
+      const optionsBox = document.getElementById("optionsContainer");
+      optionsBox.innerHTML = "";
+
+      const currentSelectedScore = userAnswers[currentQuestionIndex];
+
+      q.options.forEach((opt, idx) => {
+        const isSelected = currentSelectedScore === opt.score;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.onclick = () => selectOption(opt.score);
+        btn.className = `w-full text-left p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm font-medium transition flex items-center justify-between ${
+          isSelected 
+            ? "bg-teal-50 border-brand-teal text-teal-900 shadow-sm" 
+            : "bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700"
+        }`;
+
+        btn.innerHTML = `
+          <span>${opt.text}</span>
+          <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[10px] ${
+            isSelected ? "border-brand-teal bg-brand-teal text-white" : "border-slate-300"
+          }">
+            ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
+          </span>
+        `;
+        optionsBox.appendChild(btn);
+      });
+
+      // Nav buttons state
+      const prevBtn = document.getElementById("prevBtn");
+      if (currentQuestionIndex > 0) {
+        prevBtn.classList.remove("hidden");
+      } else {
+        prevBtn.classList.add("hidden");
+      }
+
+      const nextBtn = document.getElementById("nextBtn");
+      if (userAnswers[currentQuestionIndex] !== undefined) {
+        nextBtn.removeAttribute("disabled");
+        nextBtn.classList.remove("bg-slate-300", "cursor-not-allowed");
+        nextBtn.classList.add("bg-brand-teal", "hover:bg-teal-800");
+        nextBtn.innerHTML = currentQuestionIndex === total - 1 
+          ? `<span>Lihat Hasil Analisis</span> <i class="fa-solid fa-square-poll-vertical"></i>` 
+          : `<span>Lanjutkan</span> <i class="fa-solid fa-chevron-right text-xs"></i>`;
+      } else {
+        nextBtn.setAttribute("disabled", "true");
+        nextBtn.classList.remove("bg-brand-teal", "hover:bg-teal-800");
+        nextBtn.classList.add("bg-slate-300", "cursor-not-allowed");
+        nextBtn.innerHTML = `<span>Lanjutkan</span> <i class="fa-solid fa-chevron-right text-xs"></i>`;
+      }
+    }
+
+    function selectOption(score) {
+      userAnswers[currentQuestionIndex] = score;
+      renderCurrentQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderCurrentQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      const quiz = assessmentData[currentAssessmentType];
+      if (currentQuestionIndex < quiz.questions.length - 1) {
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+      } else {
+        calculateAndShowResults();
+      }
+    }
+
+    function calculateAndShowResults() {
+      const sum = userAnswers.reduce((a, b) => a + b, 0);
+      const quiz = assessmentData[currentAssessmentType];
+      let outcomeKey = "mid";
+
+      if (sum <= 6) {
+        outcomeKey = "low";
+      } else if (sum <= 11) {
+        outcomeKey = "mid";
+      } else {
+        outcomeKey = "high";
+      }
+
+      const outcome = quiz.results[outcomeKey];
+
+      // Populate Report Modal
+      document.getElementById("modalReportTitle").innerText = quiz.title;
+      document.getElementById("modalScoreSubtitle").innerText = outcome.subtitle;
+      document.getElementById("modalScoreTitle").innerText = outcome.title;
+      document.getElementById("modalScoreDesc").innerText = outcome.desc;
+
+      const recsContainer = document.getElementById("modalRecommendations");
+      recsContainer.innerHTML = "";
+      outcome.recs.forEach((rec, idx) => {
+        recsContainer.innerHTML += `
+          <div class="flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
+            <span class="w-5 h-5 rounded-full bg-brand-orange text-white flex-shrink-0 flex items-center justify-center text-[10px] font-bold">
+              ${idx + 1}
+            </span>
+            <span class="leading-relaxed">${rec}</span>
+          </div>
+        `;
+      });
+
+      // Show Modal
+      document.getElementById("resultModal").classList.remove("hidden");
+      cancelAssessment();
+    }
+
+    function closeResultModal() {
+      document.getElementById("resultModal").classList.add("hidden");
+    }
+
+    // --- RUANG AMAN JEJARING LOGIC ---
+    function renderUnits(list) {
+      const container = document.getElementById("unitCardsContainer");
+      container.innerHTML = "";
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white p-6 rounded-2xl text-center border border-slate-200">
+            <p class="text-xs text-slate-500">Tidak ada unit PIK-R yang sesuai dengan pencarianmu.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(unit => {
+        const cardHtml = `
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 hover:border-brand-teal shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${unit.badgeColor}">
+                  ${unit.type} • ${unit.city}
+                </span>
+                <h4 class="font-bold text-sm sm:text-base text-slate-900 mt-1">${unit.name}</h4>
+                <p class="text-xs text-brand-teal font-semibold flex items-center gap-1 mt-0.5">
+                  <i class="fa-solid fa-location-crosshairs"></i> ${unit.distance}
+                </p>
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-600 space-y-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <p><i class="fa-regular fa-calendar-check text-slate-400 mr-1.5"></i> <strong>Jadwal:</strong> ${unit.schedule}</p>
+              <p><i class="fa-solid fa-users-viewfinder text-slate-400 mr-1.5"></i> <strong>Kegiatan:</strong> ${unit.routineActivity}</p>
+              <p><i class="fa-solid fa-user-shield text-slate-400 mr-1.5"></i> <strong>Pendamping:</strong> ${unit.counselorName}</p>
+            </div>
+
+            <div class="pt-1 flex items-center justify-between gap-2">
+              <span class="text-[11px] text-emerald-700 font-bold"><i class="fa-solid fa-badge-check"></i> Konseling Gratis</span>
+              <button onclick="rsvpUnit('${escapeHtml(unit.name)}', '${escapeHtml(unit.routineActivity)}', '${escapeHtml(unit.schedule)}')" class="bg-brand-teal hover:bg-teal-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm">
+                Gabung Kegiatan
+              </button>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", cardHtml);
+      });
+    }
+
+    function filterUnits() {
+      const keyword = document.getElementById("searchUnitInput").value.toLowerCase();
+      const city = document.getElementById("cityFilter").value;
+
+      const filtered = unitList.filter(unit => {
+        const matchesKeyword = unit.name.toLowerCase().includes(keyword) || unit.address.toLowerCase().includes(keyword);
+        const matchesCity = city === "all" || unit.city === city;
+        return matchesKeyword && matchesCity;
+      });
+
+      renderUnits(filtered);
+    }
+
+    function selectUnitFromMap(unitId) {
+      const unit = unitList.find(u => u.id === unitId);
+      if (unit) {
+        showToast(`Memilih Unit: ${unit.name}`);
+        // Scroll slightly to the cards container on mobile
+        document.getElementById("unitCardsContainer").scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function rsvpUnit(name, routine, schedule) {
+      document.getElementById("rsvpUnitName").innerText = name;
+      document.getElementById("rsvpDetails").innerHTML = `
+        Kamu terdaftar dalam sesi <strong>"${routine}"</strong> (${schedule}). Konfirmasi telah dikirimkan ke email pendaftaranmu.
+      `;
+      document.getElementById("rsvpModal").classList.remove("hidden");
+    }
+
+    function closeRsvpModal() {
+      document.getElementById("rsvpModal").classList.add("hidden");
+      showToast("Pendaftaran sesi konseling sebaya tersimpan di jadwalmu.");
+    }
+
+    // --- DIREKTORI MENTOR & PSIKOLOG LOGIC ---
+    function renderMentors(list) {
+      const grid = document.getElementById("mentorsGrid");
+      grid.innerHTML = "";
+
+      list.forEach(item => {
+        const tagBadges = item.tags.map(t => `<span class="bg-slate-100 text-slate-700 text-[10px] font-semibold px-2 py-0.5 rounded">${t}</span>`).join(" ");
+
+        const cardHtml = `
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 hover:border-brand-teal shadow-md hover:shadow-xl transition flex flex-col justify-between group">
+            <div>
+              <!-- Top Row -->
+              <div class="flex items-start justify-between gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl ${item.avatarBg} flex items-center justify-center text-xl font-bold group-hover:scale-105 transition">
+                  <i class="fa-solid ${item.icon}"></i>
+                </div>
+                <div class="flex items-center gap-1 bg-amber-50 border border-amber-200 px-2 py-1 rounded-lg text-xs font-bold text-amber-800">
+                  <i class="fa-solid fa-star text-amber-500"></i> ${item.rating}
+                  <span class="text-[10px] text-slate-400 font-normal">(${item.reviews})</span>
+                </div>
+              </div>
+
+              <!-- Main Info -->
+              <h4 class="font-extrabold text-base text-slate-900 leading-snug">${item.name}</h4>
+              <p class="text-xs font-bold text-brand-teal mt-0.5">${item.role}</p>
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">${item.experience}</p>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5 my-4">
+                ${tagBadges}
+              </div>
+            </div>
+
+            <!-- Pricing & Action -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-400">Tarif Sesi:</p>
+                <p class="text-base font-extrabold text-slate-900">${item.price}</p>
+              </div>
+              <button onclick="openBookingModal('${escapeHtml(item.name)}', '${escapeHtml(item.role)}', '${escapeHtml(item.price)}')" class="bg-slate-900 hover:bg-brand-teal text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-sm">
+                Reservasi Sesi
+              </button>
+            </div>
+          </div>
+        `;
+        grid.insertAdjacentHTML("beforeend", cardHtml);
+      });
+    }
+
+    function filterMentors(category) {
+      // Button states
+      const buttons = document.querySelectorAll(".mentor-tab-btn");
+      buttons.forEach(btn => {
+        if (btn.dataset.tab === category) {
+          btn.classList.add("bg-slate-900", "text-white");
+          btn.classList.remove("bg-white", "text-slate-700");
+        } else {
+          btn.classList.remove("bg-slate-900", "text-white");
+          btn.classList.add("bg-white", "text-slate-700");
+        }
+      });
+
+      if (category === "all") {
+        renderMentors(mentorDirectory);
+      } else {
+        const filtered = mentorDirectory.filter(m => m.category === category);
+        renderMentors(filtered);
+      }
+    }
+
+    function openBookingModal(name, role, price) {
+      document.getElementById("bookingMentorName").innerText = name;
+      document.getElementById("bookingMentorRole").innerText = role;
+      document.getElementById("bookingPriceTag").innerText = price;
+      document.getElementById("bookingModal").classList.remove("hidden");
+    }
+
+    function closeBookingModal() {
+      document.getElementById("bookingModal").classList.add("hidden");
+    }
+
+    function confirmBooking() {
+      const topic = document.getElementById("bookingTopicInput").value.trim();
+      closeBookingModal();
+      showToast("Reservasi berhasil dicatat! Tautan video konseling telah dikirim ke email.");
+      document.getElementById("bookingTopicInput").value = "";
+    }
+
+    // --- UTILITIES ---
+    function showToast(message) {
+      const toast = document.getElementById("toastNotification");
+      const msg = document.getElementById("toastMessage");
+      msg.innerText = message;
+      toast.classList.remove("translate-y-32");
+      setTimeout(() => {
+        toast.classList.add("translate-y-32");
+      }, 3500);
+    }
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+          '/': '&#x2F;',
+          '`': '&#x60;',
+          '=': '&#x3D;'
+        }[s];
+      });
+    }
+  </script>
+</body>
+</html>
