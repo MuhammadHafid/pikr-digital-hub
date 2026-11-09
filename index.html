@@ -191,7 +191,7 @@
             <!-- Trust Badges -->
             <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center sm:text-left">
               <div>
-                <p class="text-2xl font-bold text-slate-900">450+</p>
+                <p class="text-2xl font-bold text-slate-900">41.000+</p>
                 <p class="text-xs text-slate-500 font-medium">Unit PIK-R Kampus & Desa</p>
               </div>
               <div>
@@ -220,7 +220,7 @@
                     <p class="text-xs text-slate-400">Tersedia 24/7, berbasis Retrieval-Based</p>
                   </div>
                 </div>
-                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Aktif Online</span>
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Online</span>
               </div>
 
               <!-- Persona Voice Quote -->
@@ -301,7 +301,7 @@
                 <h3 class="font-bold text-sm sm:text-base flex items-center gap-1.5">
                   Chatbot Konseling
                 </h3>
-                <p class="text-xs text-teal-100">Kurasi Modul BKKBN GenRe No. 04/M-KESPRO/2024</p>
+                <p class="text-xs text-teal-100">Kurasi Modul PIK Remaja & BKR</p>
               </div>
             </div>
             <div class="flex items-center gap-2">
@@ -338,9 +338,9 @@
                  <i class="fa-solid fa-robot"></i>
               </div>
               <div class="max-w-[85%] bg-white rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm text-slate-700 shadow-sm border border-slate-100 space-y-2">
-                <p>Halo sahabat muda! Selamat datang di <strong>PIK-R Digital Hub</strong>. Aku di sini untuk mendengarkan curahan hatimu tanpa penghakiman.</p>
+                <p>Halo sahabat muda! Selamat datang di <strong>Chatbot Konseling</strong>. Aku di sini untuk mendengarkan curahan hatimu tanpa penghakiman.</p>
                 <p>Apakah kamu sedang merasa tertekan dengan transisi kelulusan, bingung menyusun CV, atau butuh teman bicara yang aman hari ini? Silakan pilih tombol pemantik di atas atau ketik pesanmu sendiri.</p>
-                <span class="block text-[10px] text-slate-400 text-right mt-1">Baru saja • Modul GenRe BKKBN</span>
+                <span class="block text-[10px] text-slate-400 text-right mt-1">Baru saja • Chatbot</span>
               </div>
             </div>
 
@@ -535,8 +535,8 @@
           <select id="cityFilter" onchange="filterUnits()" class="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-orange">
             <option value="all">Semua Wilayah</option>
             <option value="Jakarta">DKI Jakarta</option>
-            <option value="Depok">Depok & Sekitarnya</option>
-            <option value="Yogyakarta">D.I. Yogyakarta</option>
+            <option value="Surabaya">Surabaya & Sekitarnya</option>
+            <option value="Surabaya">D.I. Surabaya</option>
             <option value="Surabaya">Surabaya</option>
           </select>
         </div>
@@ -581,13 +581,13 @@
               </div>
 
               <!-- Interactive Pins -->
-              <!-- Pin 1: UI Depok -->
+              <!-- Pin 1: Ubaya -->
               <button onclick="selectUnitFromMap(1)" class="group absolute top-[28%] left-[28%] text-center focus:outline-none z-20">
                 <div class="w-10 h-10 rounded-2xl bg-brand-teal text-white flex items-center justify-center font-bold text-xs shadow-lg pin-active transition transform group-hover:scale-125">
                   <i class="fa-solid fa-university"></i>
                 </div>
                 <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-teal-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
-                  PIK-R UI Depok (1.2 km)
+                  PIK-R Ubaya (1.2 km)
                 </span>
               </button>
 
@@ -601,31 +601,29 @@
                 </span>
               </button>
 
-              <!-- Pin 3: UGM Bestari -->
+              <!-- Pin 3: Unesa Bestari -->
               <button onclick="selectUnitFromMap(3)" class="group absolute top-[30%] right-[32%] text-center focus:outline-none z-20">
                 <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-lg transition transform group-hover:scale-125">
                   <i class="fa-solid fa-building-columns"></i>
                 </div>
                 <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-indigo-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
-                  PIK-R UGM (2.1 km)
+                  PIK-R Unesa (2.1 km)
                 </span>
               </button>
 
-              <!-- Pin 4: Desa Menteng -->
+              <!-- Pin 4: Desa Tandes -->
               <button onclick="selectUnitFromMap(4)" class="group absolute bottom-[30%] left-[22%] text-center focus:outline-none z-20">
                 <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-lg transition transform group-hover:scale-125">
                   <i class="fa-solid fa-house-chimney-user"></i>
                 </div>
                 <span class="text-[10px] bg-slate-900/90 border border-slate-700 text-emerald-300 font-semibold px-2 py-0.5 rounded mt-1 inline-block shadow">
-                  PIK-R Menteng (4.5 km)
+                  PIK-R Tandes (4.5 km)
                 </span>
               </button>
 
             </div>
 
             <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle text-brand-teal text-[8px]"></i> Unit PIK-R Kampus</span>
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle text-brand-orange text-[8px]"></i> Komunitas Wilayah</span>
               <span class="text-slate-300 font-medium">Semua Sesi Konseling Sebaya: <strong>Rp 0 (Gratis)</strong></span>
             </div>
           </div>
@@ -718,12 +716,12 @@
         </div>
 
         <div>
-          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Pusat Krisis Darurat</h4>
-          <p class="text-xs text-slate-400 mb-3">Jika kamu atau kerabatmu berada dalam situasi krisis emosi akut yang membahayakan nyawa:</p>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">LAYANAN KONSELING</h4>
+          <p class="text-xs text-slate-400 mb-3">Setiap cerita berhak didengar. Chat Halo Remaja, ceritamu aman di sini: </p>
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
-            <p class="text-[11px] text-brand-orange font-bold">Kemenkes Sejiwa Hotline</p>
-            <p class="text-base font-bold text-white">119 (Tekan 8)</p>
-            <p class="text-[10px] text-slate-400">Bebas Pulsa • 24 Jam Penuh</p>
+            <p class="text-[11px] text-brand-orange font-bold">Layanan Halo Remaja </p>
+            <p class="text-base font-bold text-white">0853-5588-7770</p>
+            <p class="text-[10px] text-slate-400">Gratis • Cepat • Ramah</p>
           </div>
         </div>
 
@@ -1106,11 +1104,11 @@
     const unitList = [
       {
         id: 1,
-        name: "PIK-R Universitas Indonesia (UI)",
+        name: "PIK-R Universitas Surabaya (UBAYA)",
         type: "Unit Kampus",
-        city: "Depok",
+        city: "Surabaya",
         distance: "1.2 km dari posisimu",
-        address: "Gedung Pusat Kegiatan Mahasiswa (Pusgiwa) Lt. 2, Kampus UI Depok",
+        address: "Gedung Pusat Kegiatan Mahasiswa (Pusgiwa) Lt. 2, Kampus Universitas Surabaya",
         schedule: "Setiap Rabu & Sabtu (14:00 - 17:00 WIB)",
         routineActivity: "Curhat Melingkar Antar-Fakultas & Klinik Bedah Portofolio ATS",
         counselorName: "Nisa Amalia (Pendidik Sebaya GenRe Bersertifikat)",
@@ -1130,26 +1128,26 @@
       },
       {
         id: 3,
-        name: "PIK-R Bestari Universitas Gadjah Mada",
+        name: "PIK-R Bestari Universitas Negeri Surabaya",
         type: "Unit Kampus",
-        city: "Yogyakarta",
+        city: "Surabaya",
         distance: "2.1 km dari posisimu",
-        address: "Gelanggang Mahasiswa UGM, Sekip Bulaksumur Blok C, Yogyakarta",
+        address: "Gelanggang Mahasiswa Unesa, Sekip Bulaksumur Blok C, Surabaya",
         schedule: "Setiap Selasa & Sabtu (13:00 - 16:30 WIB)",
         routineActivity: "Diskusi Quarter Life Crisis, Bedah CV Santai & Coffee Chat",
-        counselorName: "Dimas Aji & Sarah K. (Konselor GenRe DIY)",
+        counselorName: "Dimas Aji & Sarah K. (Konselor GenRe Surabaya)",
         badgeColor: "bg-indigo-100 text-indigo-800"
       },
       {
         id: 4,
-        name: "PIK-R Remaja Guyub Kelurahan Menteng",
+        name: "PIK-R Remaja Kelurahan Tandes Ceria",
         type: "Unit Kelurahan/Desa",
-        city: "Jakarta",
+        city: "Surabaya",
         distance: "4.5 km dari posisimu",
-        address: "RPTRA Gondangdia Berseri, Jl. Teuku Umar No. 12, Jakarta Pusat",
+        address: "RPTRA Teuku Umar Berseri, Jl. Teuku Umar No. 12, Tandes, Surabaya",
         schedule: "Setiap Sabtu Pagi (09:00 - 12:00 WIB)",
         routineActivity: "Konseling Terbuka Pemuda Desa, Pelatihan Wirausaha Kreatif",
-        counselorName: "Ibu Larasati & Tim Satgas BKKBN DKI",
+        counselorName: "Ibu Larasati & Tim Satgas BKKBN JATIM",
         badgeColor: "bg-emerald-100 text-emerald-800"
       }
     ];
@@ -1162,7 +1160,7 @@
         name: "Dyah Ayu P., M.Psi., Psikolog",
         role: "Psikolog Klinis Dewasa (SIPP: 2021-0982-K)",
         experience: "Pengalaman 7+ Tahun menangani Quarter-Life Crisis & Burnout",
-        price: "Rp 120.000",
+        price: "Rp 60.000",
         priceDetails: "Per sesi 50 Menit (Harga Khusus Subsidi PIK-R)",
         rating: "4.9",
         reviews: "184 ulasan",
@@ -1176,7 +1174,7 @@
         name: "Bagas Wicaksono, S.Psi.",
         role: "Senior HRBP di Unicorn Tech & Career Coach",
         experience: "Telah membedah 2.500+ CV & mewawancarai 600+ fresh graduate",
-        price: "Rp 75.000",
+        price: "Rp 50.000",
         priceDetails: "Per sesi privat 45 Menit",
         rating: "4.95",
         reviews: "312 ulasan",
@@ -1190,7 +1188,7 @@
         name: "Farhan Maulana, M.Psi., Psikolog",
         role: "Psikolog Relasi & Transisi Dewasa Muda",
         experience: "Fokus pada trauma ekspektasi keluarga & sindrom imposter",
-        price: "Rp 120.000",
+        price: "Rp 60.000",
         priceDetails: "Per sesi 50 Menit (Subsidi BKKBN)",
         rating: "4.88",
         reviews: "96 ulasan",
